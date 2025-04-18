@@ -10,7 +10,7 @@ import {
   usePhotoLibraryPermission,
 } from '#/lib/hooks/usePermissions'
 import {compressIfNeeded} from '#/lib/media/manip'
-import {colors} from '#/lib/styles'
+import {openCamera, openCropper, openPicker} from '#/lib/media/picker'
 import {logger} from '#/logger'
 import {isAndroid, isNative} from '#/platform/detection'
 import {
@@ -19,8 +19,9 @@ import {
   createComposerImage,
   type ImageMeta,
 } from '#/state/gallery'
+import {EditImageDialog} from '#/view/com/composer/photos/EditImageDialog'
 import {EventStopper} from '#/view/com/util/EventStopper'
-import {tokens, useTheme} from '#/alf'
+import {atoms as a, tokens, useTheme} from '#/alf'
 import {useDialogControl} from '#/components/Dialog'
 import {useSheetWrapper} from '#/components/Dialog/sheet-wrapper'
 import {
@@ -30,8 +31,6 @@ import {
 import {StreamingLive_Stroke2_Corner0_Rounded as LibraryIcon} from '#/components/icons/StreamingLive'
 import {Trash_Stroke2_Corner0_Rounded as TrashIcon} from '#/components/icons/Trash'
 import * as Menu from '#/components/Menu'
-import {openCamera, openCropper, openPicker} from '../../../lib/media/picker'
-import {EditImageDialog} from '../composer/photos/EditImageDialog'
 
 export function UserBanner({
   type,
@@ -136,7 +135,12 @@ export function UserBanner({
                   />
                 )}
                 <View
-                  style={[styles.editButtonContainer, t.atoms.bg_contrast_25]}>
+                  style={[
+                    styles.editButtonContainer,
+                    t.atoms.bg_contrast_25,
+                    a.border,
+                    t.atoms.border_contrast_low,
+                  ]}>
                   <CameraFilledIcon
                     height={14}
                     width={14}
@@ -233,7 +237,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.gray5,
   },
   bannerImage: {
     width: '100%',
