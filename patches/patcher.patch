@@ -1,0 +1,68 @@
+From f7d2db8840208621ae05fd20d28510c3758be889 Mon Sep 17 00:00:00 2001
+From: James Futhey <kidGodzilla@users.noreply.github.com>
+Date: Sun, 20 Apr 2025 21:46:05 +0800
+Subject: [PATCH] patcher
+
+---
+ apply-patches.sh | 15 +++++++++++++++
+ package.json     |  1 +
+ patching.md      | 11 +++++++++++
+ 3 files changed, 27 insertions(+)
+ create mode 100755 apply-patches.sh
+ create mode 100644 patching.md
+
+diff --git a/apply-patches.sh b/apply-patches.sh
+new file mode 100755
+index 000000000..3aab314ee
+--- /dev/null
++++ b/apply-patches.sh
+@@ -0,0 +1,15 @@
++#!/bin/bash
++set -e  # Exit on error
++
++echo "Fetching latest upstream..."
++git fetch upstream
++git checkout main
++git reset --hard upstream/main
++
++echo "Applying patches..."
++for patch in patches/*.patch; do
++  echo "Applying $patch"
++  git apply "$patch"
++done
++
++echo "All patches applied."
+\ No newline at end of file
+diff --git a/package.json b/package.json
+index b42f5f2c6..88656282a 100644
+--- a/package.json
++++ b/package.json
+@@ -56,6 +56,7 @@
+     "make-deploy-bundle": "bash scripts/bundleUpdate.sh",
+     "generate-webpack-stats-file": "EXPO_PUBLIC_GENERATE_STATS=1 yarn build-web",
+     "open-analyzer": "EXPO_PUBLIC_OPEN_ANALYZER=1 yarn build-web",
++    "patch": "./apply-patches.sh",
+     "icons:optimize": "svgo -f ./assets/icons"
+   },
+   "dependencies": {
+diff --git a/patching.md b/patching.md
+new file mode 100644
+index 000000000..3d757c4f3
+--- /dev/null
++++ b/patching.md
+@@ -0,0 +1,11 @@
++# Patching
++
++## Last commit as a patch
++```
++git format-patch -1 HEAD --stdout > patches/patch-name.patch
++```
++
++## Applying patches
++```
++yarn patch
++```
+\ No newline at end of file
+-- 
+2.39.5 (Apple Git-154)
+

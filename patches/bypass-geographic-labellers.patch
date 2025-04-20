@@ -1,0 +1,25 @@
+From 0d68dd30df1e80ad511d36f0e2a78712bdeb2bfe Mon Sep 17 00:00:00 2001
+From: James Futhey <kidGodzilla@users.noreply.github.com>
+Date: Sun, 20 Apr 2025 21:27:21 +0800
+Subject: [PATCH] bypass geographic labellers
+
+---
+ src/state/session/additional-moderation-authorities.ts | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/state/session/additional-moderation-authorities.ts b/src/state/session/additional-moderation-authorities.ts
+index 7f0adf797..149aff675 100644
+--- a/src/state/session/additional-moderation-authorities.ts
++++ b/src/state/session/additional-moderation-authorities.ts
+@@ -85,6 +85,8 @@ export function configureAdditionalModerationAuthorities() {
+     additionalLabelers = []
+   }
+ 
++  additionalLabelers = []
++
+   const appLabelers = Array.from(
+     new Set([...BskyAgent.appLabelers, ...additionalLabelers]),
+   )
+-- 
+2.39.5 (Apple Git-154)
+

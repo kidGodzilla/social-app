@@ -1,0 +1,342 @@
+diff --git a/bskyweb/templates/base.html b/bskyweb/templates/base.html
+index 349bd74e1..9867f894d 100644
+--- a/bskyweb/templates/base.html
++++ b/bskyweb/templates/base.html
+@@ -103,7 +103,12 @@
+   <div id="root">
+     <div id="splash">
+       <!-- Bluesky SVG -->
+-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 320"><path fill="#0085ff" d="M180 142c-16.3-31.7-60.7-90.8-102-120C38.5-5.9 23.4-1 13.5 3.4 2.1 8.6 0 26.2 0 36.5c0 10.4 5.7 84.8 9.4 97.2 12.2 41 55.7 55 95.7 50.5-58.7 8.6-110.8 30-42.4 106.1 75.1 77.9 103-16.7 117.3-64.6 14.3 48 30.8 139 116 64.6 64-64.6 17.6-97.5-41.1-106.1 40 4.4 83.5-9.5 95.7-50.5 3.7-12.4 9.4-86.8 9.4-97.2 0-10.3-2-27.9-13.5-33C336.5-1 321.5-6 282 22c-41.3 29.2-85.7 88.3-102 120Z"/></svg>
++      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
++        <path d="M9 15C9.85038 15.6303 10.8846 16 12 16C13.1154 16 14.1496 15.6303 15 15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
++        <ellipse cx="15" cy="9.5" rx="1" ry="1.5" fill="#1C274C"/>
++        <ellipse cx="9" cy="9.5" rx="1" ry="1.5" fill="#1C274C"/>
++        <path opacity="0.5" d="M22 19.723V12.3006C22 6.61173 17.5228 2 12 2C6.47715 2 2 6.61173 2 12.3006V19.723C2 21.0453 3.35098 21.9054 4.4992 21.314C5.42726 20.836 6.5328 20.9069 7.39614 21.4998C8.36736 22.1667 9.63264 22.1667 10.6039 21.4998L10.9565 21.2576C11.5884 20.8237 12.4116 20.8237 13.0435 21.2576L13.3961 21.4998C14.3674 22.1667 15.6326 22.1667 16.6039 21.4998C17.4672 20.9069 18.5727 20.836 19.5008 21.314C20.649 21.9054 22 21.0453 22 19.723Z" stroke="#1C274C" stroke-width="1.5"/>
++      </svg>
+     </div>
+   </div>
+ 
+diff --git a/src/screens/Settings/Settings.tsx b/src/screens/Settings/Settings.tsx
+index a723aaa37..4e65e199b 100644
+--- a/src/screens/Settings/Settings.tsx
++++ b/src/screens/Settings/Settings.tsx
+@@ -1,6 +1,6 @@
+ import {useState} from 'react'
+ import {LayoutAnimation, Pressable, View} from 'react-native'
+-import {Linking} from 'react-native'
++// import {Linking} from 'react-native'
+ import {useReducedMotion} from 'react-native-reanimated'
+ import {type AppBskyActorDefs, moderateProfile} from '@atproto/api'
+ import {msg, Trans} from '@lingui/macro'
+@@ -9,7 +9,7 @@ import {useNavigation} from '@react-navigation/native'
+ import {type NativeStackScreenProps} from '@react-navigation/native-stack'
+ 
+ import {IS_INTERNAL} from '#/lib/app-info'
+-import {HELP_DESK_URL} from '#/lib/constants'
++// import {HELP_DESK_URL} from '#/lib/constants'
+ import {useAccountSwitcher} from '#/lib/hooks/useAccountSwitcher'
+ import {
+   type CommonNavigatorParams,
+@@ -34,9 +34,9 @@ import {AvatarStackWithFetch} from '#/components/AvatarStack'
+ import {useDialogControl} from '#/components/Dialog'
+ import {SwitchAccountDialog} from '#/components/dialogs/SwitchAccount'
+ import {Accessibility_Stroke2_Corner2_Rounded as AccessibilityIcon} from '#/components/icons/Accessibility'
+-import {BubbleInfo_Stroke2_Corner2_Rounded as BubbleInfoIcon} from '#/components/icons/BubbleInfo'
++// import {BubbleInfo_Stroke2_Corner2_Rounded as BubbleInfoIcon} from '#/components/icons/BubbleInfo'
+ import {ChevronTop_Stroke2_Corner0_Rounded as ChevronUpIcon} from '#/components/icons/Chevron'
+-import {CircleQuestion_Stroke2_Corner2_Rounded as CircleQuestionIcon} from '#/components/icons/CircleQuestion'
++// import {CircleQuestion_Stroke2_Corner2_Rounded as CircleQuestionIcon} from '#/components/icons/CircleQuestion'
+ import {CodeBrackets_Stroke2_Corner2_Rounded as CodeBracketsIcon} from '#/components/icons/CodeBrackets'
+ import {DotGrid_Stroke2_Corner0_Rounded as DotsHorizontal} from '#/components/icons/DotGrid'
+ import {Earth_Stroke2_Corner2_Rounded as EarthIcon} from '#/components/icons/Globe'
+@@ -210,22 +210,22 @@ export function SettingsScreen({}: Props) {
+               <Trans>Languages</Trans>
+             </SettingsList.ItemText>
+           </SettingsList.LinkItem>
+-          <SettingsList.PressableItem
+-            onPress={() => Linking.openURL(HELP_DESK_URL)}
+-            label={_(msg`Help`)}
+-            accessibilityHint={_(msg`Opens helpdesk in browser`)}>
+-            <SettingsList.ItemIcon icon={CircleQuestionIcon} />
+-            <SettingsList.ItemText>
+-              <Trans>Help</Trans>
+-            </SettingsList.ItemText>
+-            <SettingsList.Chevron />
+-          </SettingsList.PressableItem>
+-          <SettingsList.LinkItem to="/settings/about" label={_(msg`About`)}>
+-            <SettingsList.ItemIcon icon={BubbleInfoIcon} />
+-            <SettingsList.ItemText>
+-              <Trans>About</Trans>
+-            </SettingsList.ItemText>
+-          </SettingsList.LinkItem>
++          {/*<SettingsList.PressableItem*/}
++          {/*  onPress={() => Linking.openURL(HELP_DESK_URL)}*/}
++          {/*  label={_(msg`Help`)}*/}
++          {/*  accessibilityHint={_(msg`Opens helpdesk in browser`)}>*/}
++          {/*  <SettingsList.ItemIcon icon={CircleQuestionIcon} />*/}
++          {/*  <SettingsList.ItemText>*/}
++          {/*    <Trans>Help</Trans>*/}
++          {/*  </SettingsList.ItemText>*/}
++          {/*  <SettingsList.Chevron />*/}
++          {/*</SettingsList.PressableItem>*/}
++          {/*<SettingsList.LinkItem to="/settings/about" label={_(msg`About`)}>*/}
++          {/*  <SettingsList.ItemIcon icon={BubbleInfoIcon} />*/}
++          {/*  <SettingsList.ItemText>*/}
++          {/*    <Trans>About</Trans>*/}
++          {/*  </SettingsList.ItemText>*/}
++          {/*</SettingsList.LinkItem>*/}
+           <SettingsList.Divider />
+           <SettingsList.PressableItem
+             destructive
+diff --git a/src/view/com/auth/SplashScreen.web.tsx b/src/view/com/auth/SplashScreen.web.tsx
+index 30ebb391f..694a070b7 100644
+--- a/src/view/com/auth/SplashScreen.web.tsx
++++ b/src/view/com/auth/SplashScreen.web.tsx
+@@ -17,7 +17,7 @@ import {atoms as a, useTheme} from '#/alf'
+ import {AppLanguageDropdown} from '#/components/AppLanguageDropdown'
+ import {Button, ButtonText} from '#/components/Button'
+ import * as Layout from '#/components/Layout'
+-import {InlineLinkText} from '#/components/Link'
++// import {InlineLinkText} from '#/components/Link'
+ import {Text} from '#/components/Typography'
+ 
+ export const SplashScreen = ({
+@@ -162,23 +162,23 @@ function Footer() {
+         a.flex_1,
+         t.atoms.border_contrast_medium,
+       ]}>
+-      <InlineLinkText
+-        label={_(msg`Learn more about Bluesky`)}
+-        to="https://bsky.social">
+-        <Trans>Business</Trans>
+-      </InlineLinkText>
+-      <InlineLinkText
+-        label={_(msg`Read the Bluesky blog`)}
+-        to="https://bsky.social/about/blog">
+-        <Trans>Blog</Trans>
+-      </InlineLinkText>
+-      <InlineLinkText
+-        label={_(msg`See jobs at Bluesky`)}
+-        to="https://bsky.social/about/join">
+-        <Trans comment="Link to a page with job openings at Bluesky">
+-          Jobs
+-        </Trans>
+-      </InlineLinkText>
++      {/*<InlineLinkText*/}
++      {/*  label={_(msg`Learn more about Bluesky`)}*/}
++      {/*  to="https://bsky.social">*/}
++      {/*  <Trans>Business</Trans>*/}
++      {/*</InlineLinkText>*/}
++      {/*<InlineLinkText*/}
++      {/*  label={_(msg`Read the Bluesky blog`)}*/}
++      {/*  to="https://bsky.social/about/blog">*/}
++      {/*  <Trans>Blog</Trans>*/}
++      {/*</InlineLinkText>*/}
++      {/*<InlineLinkText*/}
++      {/*  label={_(msg`See jobs at Bluesky`)}*/}
++      {/*  to="https://bsky.social/about/join">*/}
++      {/*  <Trans comment="Link to a page with job openings at Bluesky">*/}
++      {/*    Jobs*/}
++      {/*  </Trans>*/}
++      {/*</InlineLinkText>*/}
+ 
+       <View style={a.flex_1} />
+ 
+diff --git a/src/view/icons/Logo.tsx b/src/view/icons/Logo.tsx
+index 4de7c1613..06aee5605 100644
+--- a/src/view/icons/Logo.tsx
++++ b/src/view/icons/Logo.tsx
+@@ -1,12 +1,12 @@
+ import React from 'react'
+-import {StyleSheet, TextProps} from 'react-native'
++import {StyleSheet, type TextProps} from 'react-native'
+ import Svg, {
+   Defs,
+   LinearGradient,
+-  Path,
+-  PathProps,
++  // Path,
++  type PathProps,
+   Stop,
+-  SvgProps,
++  type SvgProps,
+ } from 'react-native-svg'
+ import {Image} from 'expo-image'
+ 
+@@ -51,7 +51,7 @@ export const Logo = React.forwardRef(function LogoImpl(props: Props, ref) {
+       fill="none"
+       // @ts-ignore it's fiiiiine
+       ref={ref}
+-      viewBox="0 0 64 57"
++      viewBox="0 0 24 24"
+       {...rest}
+       style={[{width: size, height: size * ratio}, styles]}>
+       {gradient && (
+@@ -63,9 +63,19 @@ export const Logo = React.forwardRef(function LogoImpl(props: Props, ref) {
+         </Defs>
+       )}
+ 
+-      <Path
+-        fill={_fill}
+-        d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"
++      <path
++        d="M9 15C9.85038 15.6303 10.8846 16 12 16C13.1154 16 14.1496 15.6303 15 15"
++        stroke="#ffffff66"
++        strokeWidth="1.5"
++        strokeLinecap="round"
++      />
++      <ellipse cx="15" cy="9.5" rx="1" ry="1.5" fill="#ffffff66" />
++      <ellipse cx="9" cy="9.5" rx="1" ry="1.5" fill="#ffffff66" />
++      <path
++        opacity="0.5"
++        d="M22 19.723V12.3006C22 6.61173 17.5228 2 12 2C6.47715 2 2 6.61173 2 12.3006V19.723C2 21.0453 3.35098 21.9054 4.4992 21.314C5.42726 20.836 6.5328 20.9069 7.39614 21.4998C8.36736 22.1667 9.63264 22.1667 10.6039 21.4998L10.9565 21.2576C11.5884 20.8237 12.4116 20.8237 13.0435 21.2576L13.3961 21.4998C14.3674 22.1667 15.6326 22.1667 16.6039 21.4998C17.4672 20.9069 18.5727 20.836 19.5008 21.314C20.649 21.9054 22 21.0453 22 19.723Z"
++        stroke="#ffffff66"
++        strokeWidth="1.5"
+       />
+     </Svg>
+   )
+diff --git a/src/view/icons/Logotype.tsx b/src/view/icons/Logotype.tsx
+index 8be4980e6..9183ce147 100644
+--- a/src/view/icons/Logotype.tsx
++++ b/src/view/icons/Logotype.tsx
+@@ -1,28 +1,15 @@
+-import Svg, {Path, PathProps, SvgProps} from 'react-native-svg'
++import {type PathProps, type SvgProps} from 'react-native-svg'
+ 
+-import {usePalette} from '#/lib/hooks/usePalette'
++// import {usePalette} from '#/lib/hooks/usePalette'
+ 
+-const ratio = 17 / 64
++// const ratio = 17 / 64
+ 
+-export function Logotype({
+-  fill,
+-  ...rest
+-}: {fill?: PathProps['fill']} & SvgProps) {
+-  const pal = usePalette('default')
++export function Logotype({}: // fill,
++// ...rest
++{fill?: PathProps['fill']} & SvgProps) {
++  // const pal = usePalette('default')
+   // @ts-ignore it's fiiiiine
+-  const size = parseInt(rest.width || 32)
++  // const size = parseInt(rest.width || 32)
+ 
+-  return (
+-    <Svg
+-      fill="none"
+-      viewBox="0 0 64 17"
+-      {...rest}
+-      width={size}
+-      height={Number(size) * ratio}>
+-      <Path
+-        fill={fill || pal.text.color}
+-        d="M8.478 6.252c1.503.538 2.3 1.78 2.3 3.172 0 2.356-1.576 3.785-4.6 3.785H0V0h5.974c2.875 0 4.267 1.466 4.267 3.413 0 1.3-.594 2.245-1.763 2.839Zm-2.69-4.193H2.504v3.45h3.284c1.28 0 1.967-.667 1.967-1.78 0-1.02-.705-1.67-1.967-1.67Zm-3.284 9.072h3.544c1.41 0 2.17-.65 2.17-1.818 0-1.224-.723-1.837-2.17-1.837H2.504v3.655ZM14.251 13.209h-2.337V0h2.337v13.209ZM22.001 8.998V3.636h2.338v9.573h-2.263v-1.392c-.724 1.076-1.726 1.614-3.006 1.614-2.022 0-3.34-1.224-3.34-3.45V3.636h2.338v5.955c0 1.206.594 1.818 1.8 1.818 1.132 0 2.133-.835 2.133-2.411ZM34.979 8.59v.556h-7.161c.167 1.651 1.076 2.467 2.486 2.467 1.076 0 1.8-.463 2.189-1.372h2.244c-.5 1.947-2.17 3.19-4.452 3.19-1.428 0-2.579-.463-3.45-1.372-.872-.91-1.318-2.115-1.318-3.637 0-1.502.427-2.708 1.299-3.636.872-.909 2.004-1.372 3.432-1.372 1.447 0 2.597.482 3.45 1.428.854.946 1.28 2.208 1.28 3.747Zm-4.75-3.358c-1.28 0-2.17.742-2.393 2.281h4.805c-.204-1.391-1.057-2.281-2.411-2.281ZM40.16 13.469c-2.783 0-4.249-1.095-4.379-3.303h2.282c.13 1.188.724 1.633 2.134 1.633 1.261 0 1.892-.39 1.892-1.15 0-.687-.445-1.02-1.874-1.262l-1.094-.185c-2.097-.353-3.136-1.318-3.136-2.894 0-1.8 1.429-2.894 3.97-2.894 2.728 0 4.138 1.075 4.23 3.246h-2.207c-.056-1.169-.742-1.577-2.023-1.577-1.113 0-1.67.371-1.67 1.113 0 .668.483.965 1.596 1.169l1.206.186c2.32.426 3.32 1.28 3.32 2.912 0 1.93-1.557 3.006-4.247 3.006ZM54.667 13.209h-2.671l-2.783-4.453-1.447 1.447v3.006h-2.3V0h2.3v7.606l3.896-3.97h2.783l-3.618 3.618 3.84 5.955ZM60.772 6.048l.78-2.412H64l-3.692 10.352c-.39 1.057-.872 1.818-1.484 2.245-.612.426-1.484.63-2.634.63-.39 0-.724-.018-1.02-.055V14.97h.89c1.057 0 1.577-.65 1.577-1.54 0-.445-.149-1.094-.446-1.929l-2.746-7.866h2.487l.779 2.393c.575 1.8 1.076 3.58 1.521 5.343.408-1.521.928-3.302 1.54-5.324Z"
+-      />
+-    </Svg>
+-  )
++  return <h1Text style={{margin: 0}}>Boosky</h1Text>
+ }
+diff --git a/src/view/shell/desktop/RightNav.tsx b/src/view/shell/desktop/RightNav.tsx
+index 18ce42ee8..b55249fec 100644
+--- a/src/view/shell/desktop/RightNav.tsx
++++ b/src/view/shell/desktop/RightNav.tsx
+@@ -4,7 +4,7 @@ import {msg, Trans} from '@lingui/macro'
+ import {useLingui} from '@lingui/react'
+ import {useNavigation} from '@react-navigation/core'
+ 
+-import {FEEDBACK_FORM_URL, HELP_DESK_URL} from '#/lib/constants'
++// import {FEEDBACK_FORM_URL, HELP_DESK_URL} from '#/lib/constants'
+ import {useKawaiiMode} from '#/state/preferences/kawaii'
+ import {useSession} from '#/state/session'
+ import {DesktopFeeds} from '#/view/shell/desktop/Feeds'
+@@ -44,7 +44,7 @@ function useWebQueryParams() {
+ export function DesktopRightNav({routeName}: {routeName: string}) {
+   const t = useTheme()
+   const {_} = useLingui()
+-  const {hasSession, currentAccount} = useSession()
++  const {hasSession} = useSession()
+   const kawaii = useKawaiiMode()
+   const gutters = useGutters(['base', 0, 'base', 'wide'])
+   const isSearchScreen = routeName === 'Search'
+@@ -92,34 +92,34 @@ export function DesktopRightNav({routeName}: {routeName: string}) {
+       {showTrending && <SidebarTrendingTopics />}
+ 
+       <Text style={[a.leading_snug, t.atoms.text_contrast_low]}>
+-        {hasSession && (
+-          <>
+-            <InlineLinkText
+-              to={FEEDBACK_FORM_URL({
+-                email: currentAccount?.email,
+-                handle: currentAccount?.handle,
+-              })}
+-              label={_(msg`Feedback`)}>
+-              {_(msg`Feedback`)}
+-            </InlineLinkText>
+-            {' • '}
+-          </>
+-        )}
+-        <InlineLinkText
+-          to="https://bsky.social/about/support/privacy-policy"
+-          label={_(msg`Privacy`)}>
+-          {_(msg`Privacy`)}
+-        </InlineLinkText>
+-        {' • '}
+-        <InlineLinkText
+-          to="https://bsky.social/about/support/tos"
+-          label={_(msg`Terms`)}>
+-          {_(msg`Terms`)}
+-        </InlineLinkText>
+-        {' • '}
+-        <InlineLinkText label={_(msg`Help`)} to={HELP_DESK_URL}>
+-          {_(msg`Help`)}
+-        </InlineLinkText>
++        {/*{hasSession && (*/}
++        {/*  <>*/}
++        {/*    <InlineLinkText*/}
++        {/*      to={FEEDBACK_FORM_URL({*/}
++        {/*        email: currentAccount?.email,*/}
++        {/*        handle: currentAccount?.handle,*/}
++        {/*      })}*/}
++        {/*      label={_(msg`Feedback`)}>*/}
++        {/*      {_(msg`Feedback`)}*/}
++        {/*    </InlineLinkText>*/}
++        {/*    {' • '}*/}
++        {/*  </>*/}
++        {/*)}*/}
++        {/*<InlineLinkText*/}
++        {/*  to="https://bsky.social/about/support/privacy-policy"*/}
++        {/*  label={_(msg`Privacy`)}>*/}
++        {/*  {_(msg`Privacy`)}*/}
++        {/*</InlineLinkText>*/}
++        {/*{' • '}*/}
++        {/*<InlineLinkText*/}
++        {/*  to="https://bsky.social/about/support/tos"*/}
++        {/*  label={_(msg`Terms`)}>*/}
++        {/*  {_(msg`Terms`)}*/}
++        {/*</InlineLinkText>*/}
++        {/*{' • '}*/}
++        {/*<InlineLinkText label={_(msg`Help`)} to={HELP_DESK_URL}>*/}
++        {/*  {_(msg`Help`)}*/}
++        {/*</InlineLinkText>*/}
+       </Text>
+ 
+       {kawaii && (
+diff --git a/web/index.html b/web/index.html
+index ab45b9a99..aff46ecab 100644
+--- a/web/index.html
++++ b/web/index.html
+@@ -145,7 +145,12 @@
+     <div id="root">
+       <div id="splash">
+         <!-- Bluesky SVG -->
+-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 320"><path fill="#0085ff" d="M180 142c-16.3-31.7-60.7-90.8-102-120C38.5-5.9 23.4-1 13.5 3.4 2.1 8.6 0 26.2 0 36.5c0 10.4 5.7 84.8 9.4 97.2 12.2 41 55.7 55 95.7 50.5-58.7 8.6-110.8 30-42.4 106.1 75.1 77.9 103-16.7 117.3-64.6 14.3 48 30.8 139 116 64.6 64-64.6 17.6-97.5-41.1-106.1 40 4.4 83.5-9.5 95.7-50.5 3.7-12.4 9.4-86.8 9.4-97.2 0-10.3-2-27.9-13.5-33C336.5-1 321.5-6 282 22c-41.3 29.2-85.7 88.3-102 120Z"/></svg>
++        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
++          <path d="M9 15C9.85038 15.6303 10.8846 16 12 16C13.1154 16 14.1496 15.6303 15 15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
++          <ellipse cx="15" cy="9.5" rx="1" ry="1.5" fill="#1C274C"/>
++          <ellipse cx="9" cy="9.5" rx="1" ry="1.5" fill="#1C274C"/>
++          <path opacity="0.5" d="M22 19.723V12.3006C22 6.61173 17.5228 2 12 2C6.47715 2 2 6.61173 2 12.3006V19.723C2 21.0453 3.35098 21.9054 4.4992 21.314C5.42726 20.836 6.5328 20.9069 7.39614 21.4998C8.36736 22.1667 9.63264 22.1667 10.6039 21.4998L10.9565 21.2576C11.5884 20.8237 12.4116 20.8237 13.0435 21.2576L13.3961 21.4998C14.3674 22.1667 15.6326 22.1667 16.6039 21.4998C17.4672 20.9069 18.5727 20.836 19.5008 21.314C20.649 21.9054 22 21.0453 22 19.723Z" stroke="#1C274C" stroke-width="1.5"/>
++        </svg>
+       </div>
+     </div>
+   </body>
