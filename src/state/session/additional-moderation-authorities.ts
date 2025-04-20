@@ -85,6 +85,8 @@ export function configureAdditionalModerationAuthorities() {
     additionalLabelers = []
   }
 
+  additionalLabelers = []
+
   const appLabelers = Array.from(
     new Set([...BskyAgent.appLabelers, ...additionalLabelers]),
   )
