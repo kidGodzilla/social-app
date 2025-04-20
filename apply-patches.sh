@@ -7,7 +7,7 @@ git checkout main
 git reset --hard upstream/main
 
 echo "Applying patches..."
-for patch in patches/*.patch; do
+for patch in fork-patches/*.patch; do
   echo "Applying $patch"
   git apply "$patch"
 done

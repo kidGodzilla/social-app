@@ -2,7 +2,7 @@
 
 ## Last commit as a patch
 ```
-git format-patch -1 HEAD --stdout > patches/patch-name.patch
+git format-patch -1 HEAD --stdout > fork-patches/patch-name.patch
 ```
 
 ## Applying patches
