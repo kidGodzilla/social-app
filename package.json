@@ -8,8 +8,7 @@
   "packageManager": "yarn@1.22.22",
   "scripts": {
     "prepare": "is-ci || husky install",
-    "postinstall": "patch-package && yarn intl:compile",
-    "prebuild": "expo prebuild --clean",
+    "postinstall": "patch-package",
     "android": "expo run:android",
     "android:prod": "expo run:android --variant release",
     "android:profile": "BSKY_PROFILE=1 expo run:android --variant release",
