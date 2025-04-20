@@ -1,12 +1,12 @@
 import React from 'react'
-import {StyleSheet, TextProps} from 'react-native'
+import {StyleSheet, type TextProps} from 'react-native'
 import Svg, {
   Defs,
   LinearGradient,
-  Path,
-  PathProps,
+  // Path,
+  type PathProps,
   Stop,
-  SvgProps,
+  type SvgProps,
 } from 'react-native-svg'
 import {Image} from 'expo-image'
 
@@ -51,7 +51,7 @@ export const Logo = React.forwardRef(function LogoImpl(props: Props, ref) {
       fill="none"
       // @ts-ignore it's fiiiiine
       ref={ref}
-      viewBox="0 0 64 57"
+      viewBox="0 0 24 24"
       {...rest}
       style={[{width: size, height: size * ratio}, styles]}>
       {gradient && (
@@ -63,9 +63,19 @@ export const Logo = React.forwardRef(function LogoImpl(props: Props, ref) {
         </Defs>
       )}
 
-      <Path
-        fill={_fill}
-        d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"
+      <path
+        d="M9 15C9.85038 15.6303 10.8846 16 12 16C13.1154 16 14.1496 15.6303 15 15"
+        stroke="#ffffff66"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <ellipse cx="15" cy="9.5" rx="1" ry="1.5" fill="#ffffff66" />
+      <ellipse cx="9" cy="9.5" rx="1" ry="1.5" fill="#ffffff66" />
+      <path
+        opacity="0.5"
+        d="M22 19.723V12.3006C22 6.61173 17.5228 2 12 2C6.47715 2 2 6.61173 2 12.3006V19.723C2 21.0453 3.35098 21.9054 4.4992 21.314C5.42726 20.836 6.5328 20.9069 7.39614 21.4998C8.36736 22.1667 9.63264 22.1667 10.6039 21.4998L10.9565 21.2576C11.5884 20.8237 12.4116 20.8237 13.0435 21.2576L13.3961 21.4998C14.3674 22.1667 15.6326 22.1667 16.6039 21.4998C17.4672 20.9069 18.5727 20.836 19.5008 21.314C20.649 21.9054 22 21.0453 22 19.723Z"
+        stroke="#ffffff66"
+        strokeWidth="1.5"
       />
     </Svg>
   )
