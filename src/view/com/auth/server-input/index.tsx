@@ -18,6 +18,8 @@ import {Globe_Stroke2_Corner0_Rounded as Globe} from '#/components/icons/Globe'
 import {InlineLinkText} from '#/components/Link'
 import {P, Text} from '#/components/Typography'
 
+const BOOSKY_SERVICE = 'https://boosky.app'
+
 export function ServerInputDialog({
   control,
   onSelect,
@@ -135,6 +137,9 @@ function DialogInner({
           onChange={values => setFixedOption(values[0])}>
           <ToggleButton.Button name={BSKY_SERVICE} label={_(msg`Bluesky`)}>
             <ToggleButton.ButtonText>{_(msg`Bluesky`)}</ToggleButton.ButtonText>
+          </ToggleButton.Button>
+          <ToggleButton.Button name={BOOSKY_SERVICE} label={_(msg`Boosky`)}>
+            <ToggleButton.ButtonText>{_(msg`Boosky`)}</ToggleButton.ButtonText>
           </ToggleButton.Button>
           <ToggleButton.Button
             testID="customSelectBtn"
